@@ -194,43 +194,49 @@
       color:#ffffffaa;
       font-size:12px;
     }
-    .leafTop strong{color:#ffffffdd}
     .leafArea{
       position:relative;
       height:220px;
       background:
-        radial-gradient(220px 140px at 20% 30%, rgba(42,229,139,.26), transparent 60%),
-        radial-gradient(220px 160px at 80% 20%, rgba(14,165,233,.20), transparent 60%),
-        radial-gradient(260px 200px at 65% 80%, rgba(163,255,207,.18), transparent 65%),
-        linear-gradient(135deg, rgba(20,40,30,.75), rgba(10,18,26,.65));
+        radial-gradient(280px 180px at 18% 22%, rgba(42,229,139,.32), transparent 60%),
+        radial-gradient(300px 200px at 78% 18%, rgba(14,165,233,.22), transparent 62%),
+        radial-gradient(320px 240px at 62% 86%, rgba(163,255,207,.20), transparent 66%),
+        radial-gradient(520px 240px at 40% 70%, rgba(255,255,255,.06), transparent 70%),
+        linear-gradient(135deg, rgba(14,28,22,.78), rgba(8,12,18,.72));
+      overflow:hidden;
+    }
+    .leafArea:before{
+      content:"";
+      position:absolute; inset:-40px;
+      background:
+        radial-gradient(220px 160px at 30% 25%, rgba(255,255,255,.08), transparent 55%),
+        radial-gradient(260px 180px at 60% 40%, rgba(255,255,255,.06), transparent 60%),
+        radial-gradient(320px 220px at 78% 70%, rgba(255,255,255,.05), transparent 65%);
+      transform:rotate(-6deg);
+      filter:blur(10px);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .leafArea:after{
+      content:"";
+      position:absolute; inset:-30%;
+      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.10) 45%, transparent 55%);
+      transform:translateX(-55%) rotate(10deg);
+      animation: sheen 3.8s ease-in-out infinite;
+      opacity:.55;
+      pointer-events:none;
+    }
+    @keyframes sheen{
+      0%{transform:translateX(-58%) rotate(10deg)}
+      55%{transform:translateX(58%) rotate(10deg)}
+      100%{transform:translateX(58%) rotate(10deg)}
     }
     .leafSvg{
       position:absolute; inset:0;
       width:100%; height:100%;
-      opacity:.95;
-      filter: drop-shadow(0 18px 36px rgba(0,0,0,.35));
-    }
-    .bug{
-      position:absolute;
-      width:22px; height:22px;
-      border-radius:999px;
-      display:grid; place-items:center;
-      background: radial-gradient(circle at 35% 35%, #ffffff, #1f2937 65%);
-      border:1px solid #ffffff2a;
-      box-shadow:0 12px 28px rgba(0,0,0,.35);
-      transform:translate(-50%,-50%);
-      cursor:pointer;
-      user-select:none;
-      touch-action:manipulation;
-    }
-    .bug:active{transform:translate(-50%,-50%) scale(.92)}
-    .bug span{font-size:14px}
-    .bugPop{
-      animation: pop .22s ease both;
-    }
-    @keyframes pop{
-      from{transform:translate(-50%,-50%) scale(1); opacity:1}
-      to{transform:translate(-50%,-50%) scale(.2); opacity:0}
+      opacity:.98;
+      filter: drop-shadow(0 18px 40px rgba(0,0,0,.40));
+      pointer-events:none;
     }
     .leafFooter{
       padding:10px 12px;
@@ -246,6 +252,65 @@
       color:#ffffffcc;
       white-space:nowrap;
     }
+    .softGlow{
+      box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 18px 60px rgba(0,0,0,.35);
+    }
+    .bug{
+      position:absolute;
+      width:30px; height:30px;
+      border-radius:999px;
+      transform:translate(-50%,-50%) rotate(var(--rot, 0deg)) scale(var(--s,1));
+      cursor:pointer;
+      user-select:none;
+      touch-action:manipulation;
+      background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.92), rgba(193,206,222,.65) 45%, rgba(24,36,52,.90) 78%);
+      border:1px solid rgba(255,255,255,.20);
+      box-shadow:0 14px 32px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.15);
+      display:grid;
+      place-items:center;
+      outline:none;
+      -webkit-tap-highlight-color: transparent;
+      animation: bugWiggle 1.8s ease-in-out infinite;
+    }
+    .bug:nth-child(2n){animation-duration:2.2s}
+    .bug:nth-child(3n){animation-duration:2.6s}
+    @keyframes bugWiggle{
+      0%,100%{transform:translate(-50%,-50%) rotate(var(--rot,0deg)) scale(var(--s,1)) translateY(0)}
+      50%{transform:translate(-50%,-50%) rotate(calc(var(--rot,0deg) + 6deg)) scale(var(--s,1)) translateY(-1px)}
+    }
+    .bug:active{transform:translate(-50%,-50%) rotate(var(--rot,0deg)) scale(calc(var(--s,1) * .92))}
+    .bug:before{
+      content:"";
+      width:16px; height:12px;
+      border-radius:999px;
+      background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.85), rgba(255,255,255,.18) 60%, rgba(0,0,0,.18) 100%);
+      filter: blur(.2px);
+      opacity:.9;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.10);
+      grid-area:1/1;
+    }
+    .bug:after{
+      content:"";
+      width:24px; height:24px;
+      border-radius:999px;
+      background:
+        radial-gradient(12px 8px at 30% 45%, rgba(255,255,255,.12), transparent 60%),
+        radial-gradient(12px 8px at 70% 55%, rgba(255,255,255,.10), transparent 60%),
+        conic-gradient(from 0deg, rgba(255,255,255,.08), transparent 35%, rgba(255,255,255,.07), transparent 70%, rgba(255,255,255,.06));
+      opacity:.85;
+      filter: blur(.1px);
+      grid-area:1/1;
+      mask:
+        radial-gradient(circle at 50% 50%, transparent 0 34%, #000 35% 100%);
+    }
+    .bugPop{
+      animation: pop .18s ease both;
+    }
+    @keyframes pop{
+      from{opacity:1; transform:translate(-50%,-50%) rotate(var(--rot,0deg)) scale(var(--s,1))}
+      to{opacity:0; transform:translate(-50%,-50%) rotate(var(--rot,0deg)) scale(.25)}
+    }
+
     .sigCard{
       border-radius:18px;
       border:1px solid #ffffff1f;
@@ -259,10 +324,7 @@
       color:#ffffffaa;
       font-size:12px;
     }
-    .sigTop strong{color:#ffffffdd}
-    .sigPadWrap{
-      padding:12px;
-    }
+    .sigPadWrap{ padding:12px; }
     .sigPad{
       width:100%;
       height:220px;
@@ -298,9 +360,6 @@
       border:1px solid #ffffff1f;
       backdrop-filter: blur(4px);
     }
-    .softGlow{
-      box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 18px 60px rgba(0,0,0,.35);
-    }
     .qaCard{
       border-radius:18px;
       border:1px solid #ffffff1f;
@@ -314,9 +373,7 @@
       color:#ffffffaa;
       font-size:12px;
     }
-    .codeBox{
-      padding:12px;
-    }
+    .codeBox{ padding:12px; }
     .codePre{
       margin:0;
       border-radius:16px;
@@ -329,12 +386,6 @@
       line-height:1.55;
       color:#eaeaff;
       user-select:text;
-    }
-    .ghostToken{
-      opacity:.08;
-      color:#ffffff;
-      letter-spacing:.18em;
-      font-weight:800;
     }
     .qaInput{
       width:100%;
@@ -350,6 +401,12 @@
       letter-spacing:.12em;
     }
     .qaInput::placeholder{color:#ffffff66}
+    .ghostToken{
+      opacity:.10;
+      color:#ffffff;
+      letter-spacing:.16em;
+      font-weight:800;
+    }
   </style>
 </head>
 <body>
@@ -423,17 +480,24 @@
                 <svg class="leafSvg" viewBox="0 0 800 400" preserveAspectRatio="none" aria-hidden="true">
                   <defs>
                     <linearGradient id="leafGrad" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0" stop-color="rgba(42,229,139,.55)"/>
-                      <stop offset="0.55" stop-color="rgba(14,165,233,.25)"/>
-                      <stop offset="1" stop-color="rgba(163,255,207,.35)"/>
+                      <stop offset="0" stop-color="rgba(42,229,139,.70)"/>
+                      <stop offset="0.52" stop-color="rgba(14,165,233,.28)"/>
+                      <stop offset="1" stop-color="rgba(163,255,207,.40)"/>
                     </linearGradient>
-                    <radialGradient id="leafVar" cx="35%" cy="30%" r="80%">
-                      <stop offset="0" stop-color="rgba(255,255,255,.22)"/>
-                      <stop offset="0.55" stop-color="rgba(255,255,255,.08)"/>
+                    <radialGradient id="leafVar" cx="32%" cy="30%" r="80%">
+                      <stop offset="0" stop-color="rgba(255,255,255,.26)"/>
+                      <stop offset="0.55" stop-color="rgba(255,255,255,.10)"/>
                       <stop offset="1" stop-color="rgba(255,255,255,0)"/>
                     </radialGradient>
+                    <linearGradient id="leafEdge" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="rgba(255,255,255,.18)"/>
+                      <stop offset="1" stop-color="rgba(0,0,0,.22)"/>
+                    </linearGradient>
+                    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="1.2"/>
+                    </filter>
                     <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
-                      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch" />
+                      <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" stitchTiles="stitch" />
                       <feColorMatrix type="matrix" values="
                         1 0 0 0 0
                         0 1 0 0 0
@@ -441,13 +505,20 @@
                         0 0 0 .10 0"/>
                     </filter>
                   </defs>
-                  <path d="M80,260 C120,120 260,60 380,70 C520,82 660,170 720,250 C650,340 510,380 360,352 C220,330 120,318 80,260 Z" fill="url(#leafGrad)" opacity=".88"/>
-                  <path d="M110,250 C160,140 270,92 380,98 C520,106 620,178 690,246 C615,316 515,342 370,326 C250,314 160,304 110,250 Z" fill="url(#leafVar)" opacity=".9"/>
-                  <path d="M140,266 C210,220 300,210 420,220 C520,228 600,256 660,280" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M220,120 C260,160 300,210 320,260" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M360,104 C380,160 410,220 450,280" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="3" stroke-linecap="round"/>
-                  <path d="M520,132 C500,180 480,230 460,270" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="3" stroke-linecap="round"/>
-                  <rect x="0" y="0" width="800" height="400" filter="url(#grain)" opacity=".25"/>
+
+                  <path d="M90,260 C120,120 270,58 390,70 C540,85 670,175 728,248 C660,344 520,384 360,354 C220,326 125,315 90,260 Z" fill="url(#leafGrad)" opacity=".92"/>
+                  <path d="M112,252 C160,142 275,92 392,98 C540,106 635,178 700,246 C628,320 520,346 368,328 C248,314 160,300 112,252 Z" fill="url(#leafVar)" opacity=".92"/>
+
+                  <path d="M118,250 C168,138 286,88 400,92 C560,98 650,178 710,246" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="5" stroke-linecap="round" opacity=".45" filter="url(#soft)"/>
+                  <path d="M150,266 C220,220 310,210 438,220 C545,230 624,258 684,284" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+                  <path d="M238,122 C272,160 312,212 332,268" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="3" stroke-linecap="round" opacity=".65"/>
+                  <path d="M378,104 C394,164 424,230 468,292" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+                  <path d="M540,132 C520,186 494,240 468,284" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+
+                  <path d="M98,262 C130,118 278,52 394,64 C546,80 682,172 736,246 C740,252 742,255 742,258 C678,352 530,392 360,360 C220,330 120,320 98,262 Z"
+                        fill="none" stroke="url(#leafEdge)" stroke-width="4" opacity=".35"/>
+
+                  <rect x="0" y="0" width="800" height="400" filter="url(#grain)" opacity=".24"/>
                 </svg>
               </div>
               <div class="leafFooter">
@@ -489,17 +560,17 @@
           <div class="qaCard softGlow">
             <div class="qaTop">
               <span>Investigation Log</span>
-              <span class="pill">🔎 Find the hidden token</span>
+              <span class="pill">🧩 Decode to proceed</span>
             </div>
             <div class="codeBox">
               <pre class="codePre" id="qaSnippet"></pre>
-              <input class="qaInput" id="qaInput" placeholder="PASTE TOKEN HERE" autocapitalize="characters" autocomplete="off" />
+              <input class="qaInput" id="qaInput" placeholder="ENTER FINAL TOKEN" autocapitalize="characters" autocomplete="off" />
               <div class="row" style="margin-top:12px">
                 <button class="btn primary" id="qaSubmitBtn">Verify & Continue</button>
                 <button class="btn ghost" id="qaBackBtn">Back</button>
               </div>
               <div class="status" id="qaStatus"></div>
-              <div class="hint">Tip: The token is in the snippet. It’s there… just hiding like a real incident 😌</div>
+              <div class="hint">Rule: Base64 decode the payload, then reverse the decoded string. That final value is the token.</div>
             </div>
           </div>
         </section>
@@ -521,8 +592,8 @@
   </div>
 
   <script>
-    const VALENTINE_NAME = "Heather";
-    const FROM_NAME = "Anthony";
+    const VALENTINE_NAME = "Wifey";
+    const FROM_NAME = "Hubby";
 
     const card = document.getElementById("card");
     const stageChip = document.getElementById("stageChip");
@@ -573,7 +644,7 @@
     document.getElementById("finalTitle").textContent =
       `${VALENTINE_NAME}… will you be my Valentine? 💘`;
     document.getElementById("qaText").innerHTML =
-      `${VALENTINE_NAME}, I can’t just let anyone through 😌<br/>Find the hidden <strong>RECOVERY_TOKEN</strong> inside the snippet and paste it to continue.`;
+      `${VALENTINE_NAME}, cyber-people don’t just “click continue” 😌<br/>Solve the decode step from the log, then enter the final token.`;
 
     function show(el){ el.classList.remove("hidden"); el.classList.add("fadeIn"); }
     function hide(el){ el.classList.add("hidden"); el.classList.remove("fadeIn"); }
@@ -783,10 +854,10 @@
     }
 
     function getQaToken(){
-      const key = "qa_token_v1";
+      const key = "qa_token_v2";
       const existing = localStorage.getItem(key);
       if(existing && existing.length >= 8) return existing;
-      const base = (VALENTINE_NAME.slice(0,2) + FROM_NAME.slice(0,2)).toUpperCase();
+      const base = (VALENTINE_NAME.slice(0,2) + FROM_NAME.slice(0,2)).toUpperCase().replace(/[^A-Z]/g,"X");
       const r = Math.floor(100 + Math.random()*900);
       const token = `${base}-${r}-QA`;
       localStorage.setItem(key, token);
@@ -796,21 +867,22 @@
     const QA_TOKEN = getQaToken();
 
     function buildSnippet(){
+      const reversed = QA_TOKEN.split("").reverse().join("");
+      const payload = btoa(reversed);
       const faint = `<span class="ghostToken">${QA_TOKEN}</span>`;
       const txt =
-`const telemetry = {
-  source: "canary-honeypot",
-  severity: "low (but cute)",
-  analyst: "${VALENTINE_NAME}",
-  note: "Only a real QA will notice what others miss."
+`POST /api/recovery/verify HTTP/1.1
+Host: love.local
+User-Agent: ${VALENTINE_NAME}-QA/1.0
+X-Note: decode base64, then reverse output
+X-Payload: ${payload}
+
+const check = (input) => {
+  const expected = "${faint}";
+  return (String(input||"").trim().toUpperCase() === expected);
 };
 
-function verifyRecoveryToken(input){
-  const RECOVERY_TOKEN = "${faint}";
-  return String(input || "").trim().toUpperCase() === "${QA_TOKEN}";
-}
-
-export { telemetry, verifyRecoveryToken };`;
+export default check;`;
       qaSnippet.innerHTML = txt;
     }
 
@@ -868,13 +940,13 @@ export { telemetry, verifyRecoveryToken };`;
       const v = (qaInput.value || "").trim().toUpperCase();
       if(!v){
         qaStatus.style.display = "block";
-        qaStatus.innerHTML = `❌ No token detected. Paste the RECOVERY_TOKEN from the snippet.`;
+        qaStatus.innerHTML = `❌ No token detected. Follow the rule: decode base64, reverse it, then enter the result.`;
         shake();
         return;
       }
       if(v !== QA_TOKEN){
         qaStatus.style.display = "block";
-        qaStatus.innerHTML = `❌ Token invalid. Try again 😌`;
+        qaStatus.innerHTML = `❌ Token invalid. QA says: reproduce + re-check the payload 😌`;
         shake();
         return;
       }
@@ -927,20 +999,25 @@ export { telemetry, verifyRecoveryToken };`;
 
     function spawnBugs(){
       clearBugs();
-      const count = Math.max(6, Math.min(11, Math.floor(7 + Math.random()*4)));
+      const count = Math.max(7, Math.min(12, Math.floor(8 + Math.random()*4)));
       bugCountEl.textContent = String(count);
 
       for(let i=0;i<count;i++){
-        const b = document.createElement("div");
+        const b = document.createElement("button");
+        b.type = "button";
         b.className = "bug";
-        const x = rand(18, 92);
+        const x = rand(16, 94);
         const y = rand(18, 86);
+        const rot = rand(-22, 22).toFixed(2) + "deg";
+        const s = rand(0.95, 1.25).toFixed(2);
         b.style.left = x + "%";
         b.style.top = y + "%";
-        b.innerHTML = `<span>${Math.random() > 0.5 ? "🐛" : "🪲"}</span>`;
+        b.style.setProperty("--rot", rot);
+        b.style.setProperty("--s", s);
+        b.setAttribute("aria-label", "bug");
         b.addEventListener("click", () => {
           b.classList.add("bugPop");
-          setTimeout(() => b.remove(), 210);
+          setTimeout(() => b.remove(), 190);
           bugs = bugs.filter(bb => bb !== b);
           bugCountEl.textContent = String(bugs.length);
           if(bugs.length === 0 && !sigUnlocked){
