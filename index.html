@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 Valentine Not Found</title>
+  <style>
+    :root{
+      --bg1:#070712; --bg2:#1a0d2f;
+      --card:#0f1020cc; --border:#ffffff1f;
+      --text:#f7f7ff; --muted:#c9c9ffb3;
+      --pink:#ff3ea5; --red:#ff5d6c; --violet:#7c3aed;
+      --shadow: 0 20px 60px #00000066;
+      --radius: 22px;
+    }
+    *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
+    body{
+      margin:0; min-height:100vh; display:grid; place-items:center; color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 10%, #ff3ea533, transparent 60%),
+        radial-gradient(900px 500px at 80% 20%, #7c3aed33, transparent 55%),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+      overflow:hidden;
+    }
+    .wrap{width:min(720px,92vw); position:relative;}
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      backdrop-filter: blur(10px);
+      border-radius:var(--radius);
+      padding:26px 22px;
+      box-shadow:var(--shadow);
+      position:relative;
+    }
+    .top{
+      display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:16px;
+      color:var(--muted); font-size:13px;
+    }
+    .chip{
+      display:inline-flex; gap:8px; align-items:center;
+      border:1px solid #ffffff22; padding:6px 10px; border-radius:999px;
+      background:#ffffff0d;
+    }
+    h1{margin:0 0 8px; font-size:clamp(28px,4vw,42px); letter-spacing:-0.02em}
+    p{margin:0 0 16px; color:var(--muted); line-height:1.6}
+    .row{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+    .btn{
+      border:0; border-radius:999px; padding:12px 16px; font-size:16px; cursor:pointer;
+      transition:transform .12s ease, filter .12s ease, width .12s ease;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px); filter:brightness(1.05)}
+    .primary{
+      background:linear-gradient(135deg,var(--pink),var(--red));
+      color:white; font-weight:700;
+    }
+    .ghost{
+      background:#ffffff10; color:var(--text); border:1px solid #ffffff22;
+    }
+    .danger{
+      background:linear-gradient(135deg,#ff3b3b,#ff7a3b);
+      color:white; font-weight:700;
+    }
+    .field{
+      width:100%;
+      border-radius:14px;
+      border:1px solid #ffffff22;
+      background:#00000022;
+      padding:14px 14px;
+      color:var(--text);
+      outline:none;
+      font-size:16px;
+    }
+    .field::placeholder{color:#ffffff66}
+    .status{
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:16px;
+      background:#ffffff10;
+      border:1px solid #ffffff1f;
+      display:none;
+    }
+    .hint{font-size:12px; color:#ffffff88; margin-top:10px}
+    .divider{height:1px; background:#ffffff14; margin:18px 0}
+    .tiny{font-size:12px; color:#ffffff88}
+    .hidden{display:none !important;}
+
+    /* Final screen buttons */
+    .finalBtns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:14px}
+    #noBtn{
+      position:relative;
+    }
+
+    /* Confetti hearts */
+    .hearts{position:fixed; inset:0; pointer-events:none; opacity:.65}
+
+    /* Shake effect */
+    .shake{animation:shake .32s ease}
+    @keyframes shake{
+      0%,100%{transform:translateX(0)}
+      25%{transform:translateX(-6px)}
+      75%{transform:translateX(6px)}
+    }
+
+    /* Progress bar */
+    .barWrap{
+      width:100%;
+      height:10px;
+      background:#ffffff0f;
+      border:1px solid #ffffff1a;
+      border-radius:999px;
+      overflow:hidden;
+      margin-top:10px;
+    }
+    .bar{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,var(--violet),var(--pink));
+      transition:width .35s ease;
+    }
+  </style>
+</head>
+<body>
+  <svg class="hearts" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ff3ea5" stop-opacity="0.45"/>
+        <stop offset="1" stop-color="#7c3aed" stop-opacity="0.35"/>
+      </linearGradient>
+    </defs>
+    <g fill="url(#g)">
+      <path d="M10,30 C10,20 20,15 28,22 C36,15 46,20 46,30 C46,45 28,55 28,55 C28,55 10,45 10,30 Z"/>
+      <path d="M62,22 C62,15 70,12 76,17 C82,12 90,15 90,22 C90,33 76,40 76,40 C76,40 62,33 62,22 Z"/>
+      <path d="M18,70 C18,62 26,58 32,63 C38,58 46,62 46,70 C46,82 32,88 32,88 C32,88 18,82 18,70 Z"/>
+    </g>
+  </svg>
+
+  <div class="wrap">
+    <div class="card" id="card">
+      <div class="top">
+        <span class="chip">💔 Error <strong>404</strong></span>
+        <span class="chip" id="stageChip">Stage: 1/3</span>
+      </div>
+
+      <!-- SCREEN 1: 404 -->
+      <section id="screen404">
+        <h1>404 — Valentine not found</h1>
+        <p>
+          The requested Valentine could not be located.<br/>
+          Possible causes: <em>too cute, too rare, already taken by me</em>.
+        </p>
+
+        <div class="row">
+          <button class="btn primary" id="recoverBtn">Attempt recovery</button>
+          <button class="btn ghost" id="detailsBtn">View error details</button>
+        </div>
+
+        <div class="status" id="detailsBox">
+          <strong>Diagnostic report:</strong><br/>
+          • Heartbeat: stable 💓<br/>
+          • Compatibility: 100% ✅<br/>
+          • Missing component: <em>Your signature</em> ✍️
+        </div>
+
+        <div class="hint">Tip: Click “Attempt recovery” to proceed.</div>
+      </section>
+
+      <!-- SCREEN 2: Signature -->
+      <section id="screenSig" class="hidden">
+        <h1>Recovery requires signature ✍️</h1>
+        <p>
+          Please sign below to confirm you understand the following terms:
+          <br/><strong>I love you more.</strong> (non-negotiable)
+        </p>
+
+        <input class="field" id="sigInput" placeholder="Type your signature here…" autocomplete="off"/>
+
+        <div class="row" style="margin-top:12px">
+          <button class="btn primary" id="submitSigBtn">Submit</button>
+          <button class="btn ghost" id="backBtn">Back</button>
+        </div>
+
+        <div class="barWrap" aria-hidden="true">
+          <div class="bar" id="sigBar"></div>
+        </div>
+
+        <div class="status" id="sigStatus"></div>
+        <div class="hint">Make it official 😌</div>
+      </section>
+
+      <!-- SCREEN 3: Valentine -->
+      <section id="screenFinal" class="hidden">
+        <h1>Will you be my Valentine? 💘</h1>
+        <p id="finalSub">
+          I ran the recovery… and it turns out you’re exactly what I was looking for.
+        </p>
+
+        <div class="finalBtns">
+          <button class="btn primary" id="yesBtn">Yes 😍</button>
+          <button class="btn ghost" id="noBtn">No 🙈</button>
+        </div>
+
+        <div class="status" id="finalStatus"></div>
+        <div class="tiny" style="margin-top:10px">P.S. the “No” button is a bit… slippery 🤭</div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // --------- Elements
+    const card = document.getElementById("card");
+    const stageChip = document.getElementById("stageChip");
+
+    const s404 = document.getElementById("screen404");
+    const sSig = document.getElementById("screenSig");
+    const sFinal = document.getElementById("screenFinal");
+
+    const recoverBtn = document.getElementById("recoverBtn");
+    const detailsBtn = document.getElementById("detailsBtn");
+    const detailsBox = document.getElementById("detailsBox");
+
+    const sigInput = document.getElementById("sigInput");
+    const submitSigBtn = document.getElementById("submitSigBtn");
+    const sigStatus = document.getElementById("sigStatus");
+    const sigBar = document.getElementById("sigBar");
+    const backBtn = document.getElementById("backBtn");
+
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const finalStatus = document.getElementById("finalStatus");
+
+    // --------- State
+    let yesScale = 1;          // grows when "No" dodges
+    let noDodges = 0;
+
+    // --------- Helpers
+    function show(el){ el.classList.remove("hidden"); }
+    function hide(el){ el.classList.add("hidden"); }
+    function setStage(n){ stageChip.textContent = `Stage: ${n}/3`; }
+
+    function shake(){
+      card.classList.remove("shake");
+      void card.offsetWidth;
+      card.classList.add("shake");
+    }
+
+    function confettiHearts(){
+      for(let k=0;k<26;k++){
+        const s=document.createElement("div");
+        s.textContent = Math.random() > 0.5 ? "💖" : "💜";
+        s.style.position="fixed";
+        s.style.left=(Math.random()*100)+"vw";
+        s.style.top="-10px";
+        s.style.fontSize=(16+Math.random()*18)+"px";
+        s.style.transition="transform 1.6s ease, opacity 1.6s ease";
+        document.body.appendChild(s);
+        requestAnimationFrame(()=>{
+          s.style.transform=`translateY(${110}vh) rotate(${(Math.random()*240-120)}deg)`;
+          s.style.opacity="0";
+        });
+        setTimeout(()=>s.remove(),1700);
+      }
+    }
+
+    function goToSig(){
+      setStage(2);
+      hide(s404); hide(sFinal); show(sSig);
+      sigInput.focus();
+      sigStatus.style.display="none";
+      sigBar.style.width = "0%";
+    }
+
+    function goToFinal(signature){
+      setStage(3);
+      hide(s404); hide(sSig); show(sFinal);
+      finalStatus.style.display="none";
+
+      // Reset dodging layout just in case
+      noBtn.style.position = "relative";
+      noBtn.style.left = "";
+      noBtn.style.top = "";
+      noDodges = 0;
+
+      // Reset Yes size
+      yesScale = 1;
+      applyYesScale();
+
+      // Personalize subtitle a bit
+      document.getElementById("finalSub").textContent =
+        `Recovery complete. Signature confirmed: “${signature}”. Now… one last question.`;
+    }
+
+    function applyYesScale(){
+      yesBtn.style.transform = `scale(${yesScale})`;
+    }
+
+    function dodgeNo(clicked=false){
+      noDodges++;
+
+      // Make YES grow each dodge (cap so it doesn't get ridiculous)
+      yesScale = Math.min(2.4, yesScale + 0.18);
+      applyYesScale();
+
+      // Move NO somewhere else on screen
+      const padding = 14;
+      const rect = noBtn.getBoundingClientRect();
+      const maxX = window.innerWidth - rect.width - padding;
+      const maxY = window.innerHeight - rect.height - padding;
+
+      const x = Math.max(padding, Math.random() * maxX);
+      const y = Math.max(padding, Math.random() * maxY);
+
+      noBtn.style.position = "fixed";
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      finalStatus.style.display = "block";
+      finalStatus.textContent =
+        clicked
+          ? `Nice try 😌 Attempt ${noDodges}: the universe says YES.`
+          : `Uh-uh 😅 the “No” button is reconsidering… (Yes is getting stronger)`;
+
+      shake();
+    }
+
+    // --------- Screen 1 events
+    detailsBtn.addEventListener("click", () => {
+      detailsBox.style.display = (detailsBox.style.display === "block") ? "none" : "block";
+    });
+
+    recoverBtn.addEventListener("click", () => {
+      goToSig();
+    });
+
+    // --------- Screen 2 events
+    backBtn.addEventListener("click", () => {
+      setStage(1);
+      hide(sSig); hide(sFinal); show(s404);
+      sigInput.value = "";
+      sigBar.style.width = "0%";
+      sigStatus.style.display = "none";
+    });
+
+    sigInput.addEventListener("input", () => {
+      const v = sigInput.value.trim();
+      const pct = Math.min(100, (v.length / 18) * 100);
+      sigBar.style.width = pct + "%";
+    });
+
+    submitSigBtn.addEventListener("click", () => {
+      const sig = sigInput.value.trim();
+      if(!sig){
+        sigStatus.style.display="block";
+        sigStatus.textContent = "Signature missing. Recovery cannot continue 😤";
+        shake();
+        return;
+      }
+
+      sigStatus.style.display="block";
+      sigStatus.innerHTML =
+        `✅ Signature acknowledged.<br/>System note: <strong>I love you more</strong>.`;
+
+      confettiHearts();
+
+      // Small dramatic pause then go final
+      setTimeout(() => goToFinal(sig), 1200);
+    });
+
+    // --------- Screen 3 events
+    yesBtn.addEventListener("click", () => {
+      finalStatus.style.display = "block";
+      finalStatus.textContent = "YAY 💞 Screenshot this and send me ‘YES’ 😌";
+      confettiHearts();
+
+      // Freeze the no button in place after yes
+      noBtn.style.pointerEvents = "none";
+      yesBtn.style.pointerEvents = "none";
+    });
+
+    // Dodge behaviour
+    noBtn.addEventListener("mouseenter", () => dodgeNo(false));
+    noBtn.addEventListener("click", () => dodgeNo(true));
+
+    // Start in stage 1
+    setStage(1);
+  </script>
+</body>
+</html>
