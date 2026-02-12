@@ -85,16 +85,13 @@
     .tiny{font-size:12px; color:#ffffff88}
     .hidden{display:none !important;}
 
-    /* Final screen buttons */
     .finalBtns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:14px}
     #noBtn{
       position:relative;
     }
 
-    /* Confetti hearts */
     .hearts{position:fixed; inset:0; pointer-events:none; opacity:.65}
 
-    /* Shake effect */
     .shake{animation:shake .32s ease}
     @keyframes shake{
       0%,100%{transform:translateX(0)}
@@ -102,7 +99,6 @@
       75%{transform:translateX(6px)}
     }
 
-    /* Progress bar */
     .barWrap{
       width:100%;
       height:10px;
@@ -142,7 +138,6 @@
         <span class="chip" id="stageChip">Stage: 1/3</span>
       </div>
 
-      <!-- SCREEN 1: 404 -->
       <section id="screen404">
         <h1>404 — Valentine not found</h1>
         <p>
@@ -165,7 +160,6 @@
         <div class="hint">Tip: Click “Attempt recovery” to proceed.</div>
       </section>
 
-      <!-- SCREEN 2: Signature -->
       <section id="screenSig" class="hidden">
         <h1>Recovery requires signature ✍️</h1>
         <p>
@@ -188,7 +182,6 @@
         <div class="hint">Make it official 😌</div>
       </section>
 
-      <!-- SCREEN 3: Valentine -->
       <section id="screenFinal" class="hidden">
         <h1>Will you be my Valentine? 💘</h1>
         <p id="finalSub">
@@ -207,7 +200,7 @@
   </div>
 
   <script>
-    // --------- Elements
+
     const card = document.getElementById("card");
     const stageChip = document.getElementById("stageChip");
 
@@ -229,11 +222,10 @@
     const noBtn = document.getElementById("noBtn");
     const finalStatus = document.getElementById("finalStatus");
 
-    // --------- State
-    let yesScale = 1;          // grows when "No" dodges
+    let yesScale = 1;
     let noDodges = 0;
 
-    // --------- Helpers
+    
     function show(el){ el.classList.remove("hidden"); }
     function hide(el){ el.classList.add("hidden"); }
     function setStage(n){ stageChip.textContent = `Stage: ${n}/3`; }
@@ -275,17 +267,14 @@
       hide(s404); hide(sSig); show(sFinal);
       finalStatus.style.display="none";
 
-      // Reset dodging layout just in case
       noBtn.style.position = "relative";
       noBtn.style.left = "";
       noBtn.style.top = "";
       noDodges = 0;
 
-      // Reset Yes size
       yesScale = 1;
       applyYesScale();
 
-      // Personalize subtitle a bit
       document.getElementById("finalSub").textContent =
         `Recovery complete. Signature confirmed: “${signature}”. Now… one last question.`;
     }
@@ -297,11 +286,9 @@
     function dodgeNo(clicked=false){
       noDodges++;
 
-      // Make YES grow each dodge (cap so it doesn't get ridiculous)
       yesScale = Math.min(2.4, yesScale + 0.18);
       applyYesScale();
-
-      // Move NO somewhere else on screen
+      
       const padding = 14;
       const rect = noBtn.getBoundingClientRect();
       const maxX = window.innerWidth - rect.width - padding;
@@ -323,7 +310,6 @@
       shake();
     }
 
-    // --------- Screen 1 events
     detailsBtn.addEventListener("click", () => {
       detailsBox.style.display = (detailsBox.style.display === "block") ? "none" : "block";
     });
@@ -332,7 +318,6 @@
       goToSig();
     });
 
-    // --------- Screen 2 events
     backBtn.addEventListener("click", () => {
       setStage(1);
       hide(sSig); hide(sFinal); show(s404);
@@ -362,26 +347,21 @@
 
       confettiHearts();
 
-      // Small dramatic pause then go final
       setTimeout(() => goToFinal(sig), 1200);
     });
 
-    // --------- Screen 3 events
     yesBtn.addEventListener("click", () => {
       finalStatus.style.display = "block";
       finalStatus.textContent = "YAY 💞 Screenshot this and send me ‘YES’ 😌";
       confettiHearts();
 
-      // Freeze the no button in place after yes
       noBtn.style.pointerEvents = "none";
       yesBtn.style.pointerEvents = "none";
     });
 
-    // Dodge behaviour
     noBtn.addEventListener("mouseenter", () => dodgeNo(false));
     noBtn.addEventListener("click", () => dodgeNo(true));
-
-    // Start in stage 1
+    
     setStage(1);
   </script>
 </body>
